@@ -6,7 +6,7 @@ namespace AuthAPI.Profiles;
 
 public class UserProfile : Profile
 {
-    protected UserProfile()
+    public UserProfile()
     {
         CreateMap<CreateUserDTO, User>();
     }
