@@ -1,5 +1,6 @@
 using AuthAPI.Data;
 using AuthAPI.Models;
+using AuthAPI.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,7 +17,9 @@ builder.Services
         .AddIdentity<User, IdentityRole>()
         .AddEntityFrameworkStores<AuthContext>()
         .AddDefaultTokenProviders();
+
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddScoped<RegisterService>();
 
 var app = builder.Build();
 
