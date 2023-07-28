@@ -8,7 +8,7 @@ namespace AuthAPI.Services;
 
 public class TokenService
 {
-    public void GenerateToken(User user)
+    public string GenerateToken(User user)
     {
         // Reinvindicações
         Claim[] claims = new Claim[]
@@ -21,12 +21,14 @@ public class TokenService
         var key = new SymmetricSecurityKey(Encoding.UTF8
             .GetBytes("iu29dfkamcla9w89cvhjadj21qw9zi20slALASKJSID29409SAIFVASF92387F98WEcdeflyingmoralityoftheblackgodsabbathhahaha"));
 
-        var signingCredentials = new SigningCredentials(key, SecurityAlgorithms.RsaSha256);
+        var signingCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
         var token = new JwtSecurityToken(
             expires: DateTime.Now.AddHours(4),
             claims: claims,
             signingCredentials: signingCredentials
             );
+
+        return new JwtSecurityTokenHandler().WriteToken(token);
     }
 }

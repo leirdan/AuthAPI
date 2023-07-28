@@ -18,8 +18,8 @@ public class UserController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginUserDTO dto)
     {
-        await _service.Login(dto);
-        return Ok("Authenticated!");
+        var token = await _service.Login(dto);
+        return Ok("Your token: " + token);
     }
 
     [HttpPost("register")]

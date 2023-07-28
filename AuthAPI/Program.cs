@@ -20,6 +20,7 @@ builder.Services
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<TokenService>();
 
 var app = builder.Build();
 

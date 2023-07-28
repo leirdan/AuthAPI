@@ -24,7 +24,7 @@ public class UserService
         _tokenService = tokenService;
     }
 
-    public async Task Login(LoginUserDTO dto)
+    public async Task<string> Login(LoginUserDTO dto)
     {
         var res = await _signManager.PasswordSignInAsync(dto.Username, dto.Password, true, false);
         if (!res.Succeeded)
@@ -32,10 +32,9 @@ public class UserService
             var app = new ApplicationException();
             throw new ApplicationException(app.Message);
         }
-        else
-        {
-            //_tokenService.GenerateToken(user);
-        }
+        var user = _signManager.UserManager.Users.FirstOrDefault(u => u.NormalizedUserName == u.UserName.ToUpper()) ?? throw new ArgumentNullException();
+        var token = _tokenService.GenerateToken(user);
+        return token;
     }
 
     public async Task AddUser(CreateUserDTO dto)
