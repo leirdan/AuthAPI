@@ -3,16 +3,26 @@ using AuthAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 namespace AuthAPI.Controllers;
 
+/// <summary>
+/// Lida com as requisições e chama o serviço para realizar as operações. 
+/// </summary>
 [ApiController]
 [Route("[controller]")]
 public class UserController : ControllerBase
 {
-    private RegisterService _service;
-    public UserController(RegisterService ser)
+    private UserService _service;
+    public UserController(UserService ser)
     {
         _service = ser;
     }
-    [HttpPost]
+    [HttpPost("login")]
+    public async Task<IActionResult> Login(LoginUserDTO dto)
+    {
+        await _service.Login(dto);
+        return Ok("Authenticated!");
+    }
+
+    [HttpPost("register")]
     public async Task<IActionResult> RegisterUser(CreateUserDTO dto)
     {
         await _service.AddUser(dto);

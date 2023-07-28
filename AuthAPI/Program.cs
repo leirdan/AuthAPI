@@ -19,7 +19,7 @@ builder.Services
         .AddDefaultTokenProviders();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-builder.Services.AddScoped<RegisterService>();
+builder.Services.AddScoped<UserService>();
 
 var app = builder.Build();
 
