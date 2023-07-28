@@ -14,11 +14,14 @@ public class UserService
     private IMapper _map;
     private UserManager<User> _uManager;
     private SignInManager<User> _signManager;
-    public UserService(IMapper map, UserManager<User> um, SignInManager<User> signManager)
+    private TokenService _tokenService;
+
+    public UserService(IMapper map, UserManager<User> um, SignInManager<User> signManager, TokenService tokenService)
     {
         _map = map;
         _uManager = um;
         _signManager = signManager;
+        _tokenService = tokenService;
     }
 
     public async Task Login(LoginUserDTO dto)
@@ -28,6 +31,10 @@ public class UserService
         {
             var app = new ApplicationException();
             throw new ApplicationException(app.Message);
+        }
+        else
+        {
+            //_tokenService.GenerateToken(user);
         }
     }
 
