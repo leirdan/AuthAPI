@@ -1,11 +1,21 @@
-var builder = WebApplication.CreateBuilder(args);
+using AuthAPI.Data;
+using AuthAPI.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
+var builder = WebApplication.CreateBuilder(args);
+var con = builder.Configuration.GetConnectionString("AuthCon");
 // Add services to the container.
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddDbContext<AuthContext>(opts => opts.UseSqlServer(con));
+builder.Services
+        .AddIdentity<User, IdentityRole>()
+        .AddEntityFrameworkStores<AuthContext>()
+        .AddDefaultTokenProviders();
 
 var app = builder.Build();
 

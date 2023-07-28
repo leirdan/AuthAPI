@@ -15,6 +15,6 @@ namespace AuthAPI.Data.DTO
         [Compare("Password")]
         public string ConfirmPassword { get; set;}
         public DateTime CreatedAt { get; set; } = DateTime.Now;
-
+        public DateTime Birthday { get; set; }
     }
 }
