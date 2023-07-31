@@ -8,6 +8,6 @@ public class AuthContext : IdentityDbContext<User>
 {
     public AuthContext(DbContextOptions<AuthContext> op) : base(op)
     {
-
+        
     }
 }
