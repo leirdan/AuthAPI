@@ -8,6 +8,12 @@ namespace AuthAPI.Services;
 
 public class TokenService
 {
+    private IConfiguration _config;
+
+    public TokenService(IConfiguration configuration){
+        _config = configuration;
+    }
+
     public string GenerateToken(User user)
     {
         // Reinvindicações
@@ -19,7 +25,7 @@ public class TokenService
         };
 
         var key = new SymmetricSecurityKey(Encoding.UTF8
-            .GetBytes("iu29dfkamcla9w89cvhjadj21qw9zi20slALASKJSID29409SAIFVASF92387F98WEcdeflyingmoralityoftheblackgodsabbathhahaha"));
+            .GetBytes(_config["SecurityKey"]));
 
         var signingCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 

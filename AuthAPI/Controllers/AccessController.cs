@@ -8,7 +8,7 @@ namespace AuthAPI.Controllers;
 public class AccessController : ControllerBase
 {
     [HttpGet]
-    [Authorize(Policy = "Idade Mínima")] // Indica que só usuários autorizados podem acessar o método.
+    [Authorize(Policy = "MinAge")] // Indica que só usuários autorizados podem acessar o método.
     public IActionResult Get()
     {
         return Ok("Acesso permitido.");
